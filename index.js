@@ -1,16 +1,20 @@
-const prompt = require("prompt-sync")({ sigint: true });
-let input = prompt("Qual número vc deseja insirir?\n");
+const prompt = require("prompt-sync")();
 
-function maiorNumeroPossivel() {
-    if (input === null || input === "") {
-        return "Nenhum número fornecido!";
+function maiorNumeroPossivel(num) {
+    let digits = num.split("");
+
+    for (let i = 0; i < digits.length; i++) {
+        for (let j = 1 + 1; j < digits.length; j++) {
+            if (digits[i] < digits[j]) {
+                let aux = digits[j];
+                digits[i] < digits[j];
+                digits[j] < digits[i];
+            }
+        }
     }
-    let digits = input.split("");
-    digits.sort((a, b) => b - a);
-    let maiorNumero = digits.join("");
-
-    return maiorNumero;
+    return digits.join("");
 }
+const numero = prompt("Qual número vc deseja insirir?");
 
-let resultado = maiorNumeroPossivel();
-console.log(`O maior número possível com os dígitos fornecidos é: ${resultado}`);
+let maior = maiorNumeroPossivel(numero);
+console.log(maior);
